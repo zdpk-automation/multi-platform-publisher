@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Threads Automation Configuration",
+  "description": "Schema for defining Threads content automation workflows.",
+  "type": "object",
+  "properties": {
+    "workflows": {
+      "type": "array",
+      "description": "A list of automation workflows.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A unique name for the workflow."
+          },
+          "accounts": {
+            "type": "array",
+            "description": "List of Threads account identifiers to post to.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "content_source": {
+            "type": "string",
+            "description": "Path to the text file containing the content to be posted."
+          },
+          "translation_source_language": {
+            "type": "string",
+            "description": "The original language of the content_source file (e.g., 'ko', 'en', 'ja', 'id').",
+            "pattern": "^[a-z]{2}$"
+          },
+          "language_map": {
+            "type": "object",
+            "description": "Mapping of account identifiers to target languages for translation.",
+            "patternProperties": {
+              "^[a-zA-Z0-9_]+$": {
+                "type": "string",
+                "description": "Target language for the specified account (e.g., 'en', 'ja', 'id').",
+                "pattern": "^[a-z]{2}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": ["name", "accounts", "content_source", "translation_source_language", "language_map"]
+      }
+    }
+  },
+  "required": ["workflows"]
+}

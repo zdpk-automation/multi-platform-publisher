@@ -1,0 +1,17 @@
+workflows:
+  - name: workflow1
+    accounts:
+      - account1
+      - account2
+    content_source: a.txt
+    translation_source_language: ko
+    language_map:
+      account1: ja
+      account2: en
+  - name: workflow2
+    accounts:
+      - account3
+    content_source: b.txt
+    translation_source_language: ko
+    language_map:
+      account3: id
